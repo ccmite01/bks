@@ -19,6 +19,7 @@ if [ ! -e /var/spool/cron/crontabs/root ]
     echo '* * * * * /var/spool/cron/test.sh > /var/spool/cron/log/test.log 2>&1' >> /var/spool/cron/crontabs/root
     echo '#!/bin/sh' > /var/spool/cron/test.sh
     echo 'echo "test run."' >> /var/spool/cron/test.sh
+    chmod 700 /var/spool/cron/test.sh
 fi
 
 if [ ! -d /var/spool/cron/log ]
