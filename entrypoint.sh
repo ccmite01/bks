@@ -58,11 +58,14 @@ if [ ! -d /var/spool/cron/.ssh ]
     mkdir -p /var/spool/cron/.ssh
     chmod 700 /var/spool/cron/.ssh
     touch /var/spool/cron/.ssh/known_hosts
-    touch /var/spool/cron/.ssh/id_rsa
+    touch /var/spool/cron/.ssh/id_ecdsa
     chown root:root /var/spool/cron/.ssh/known_hosts
-    chown root:root /var/spool/cron/.ssh/id_rsa
+    chown root:root /var/spool/cron/.ssh/id_ecdsa
     chmod 600 /var/spool/cron/.ssh/known_hosts
-    chmod 600 /var/spool/cron/.ssh/id_rsa
+    chmod 600 /var/spool/cron/.ssh/id_ecdsa
+    echo "StrictHostKeyChecking no" > /var/spool/cron/.ssh/config
+    echo "IdentityFile ~/.ssh/id_ecdsa" >> /var/spool/cron/.ssh/config
+    chmod 600 /var/spool/cron/.ssh/config
 fi
 
 cron -l 2 -f

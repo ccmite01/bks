@@ -28,7 +28,10 @@ RUN : "add package" && \
     chmod +x /usr/local/bin/docker-compose && \
     ln -s /var/spool/cron/.ssh /root/.ssh
 
+COPY mcrcon /usr/bin/
+RUN chmod +x /usr/bin/mcrcon
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["sh", "/entrypoint.sh"]
+
