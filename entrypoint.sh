@@ -21,6 +21,13 @@ if [ ! -e /var/spool/cron/crontabs/root ]
     echo 'echo "test run."' >> /var/spool/cron/test.sh
 fi
 
+if [ ! -d /var/spool/cron/log ]
+    then
+    mkdir -p /var/spool/cron/log
+    chown root:crontab /var/spool/cron/log
+    chmod 700 /var/spool/cron/log
+fi
+
 if [ ! -e /var/spool/cron/stop.sh ]
     then
     touch /var/spool/cron/stop.sh
@@ -49,6 +56,8 @@ if [ ! -d /var/spool/cron/.ssh ]
     then
     mkdir -p /var/spool/cron/.ssh
     chmod 700 /var/spool/cron/.ssh
+    touch /var/spool/cron/.ssh/known_hosts
+    touch /var/spool/cron/.ssh/id_rsa
     chown root:root /var/spool/cron/.ssh/known_hosts
     chown root:root /var/spool/cron/.ssh/id_rsa
     chmod 600 /var/spool/cron/.ssh/known_hosts
