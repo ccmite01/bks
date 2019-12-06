@@ -25,6 +25,15 @@ RUN : "add package" && \
     apt install -y docker-ce=17.12.1~ce-0~debian && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose && \
-    chmod +x /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose && \
+    ln -s /var/spool/cron/.ssh /root/.ssh
 
+CMD ["mkdir", "-p /var/spool/cron/.ssh"
+CMD ["touch", "/var/spool/cron/.ssh/known_hosts"
+CMD ["touch", "/var/spool/cron/.ssh/id_rsa"
+CMD ["chown", "root:root", "/var/spool/cron/.ssh/known_hosts"
+CMD ["chown", "root:root", "/var/spool/cron/.ssh/id_rsa"
+CMD ["chmod", "600", "/var/spool/cron/.ssh/known_hosts"
+CMD ["chmod", "600", "/var/spool/cron/.ssh/id_rsa"
+CMD ["cron", "-l", "2", "-f"]
 ENTRYPOINT ["cron", "-l", "2", "-f"]
