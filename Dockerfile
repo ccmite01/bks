@@ -32,6 +32,6 @@ COPY mcrcon /usr/bin/
 RUN chmod +x /usr/bin/mcrcon
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
-ENV MC_SRVIP="jve" MC_SSH="/usr/bin/ssh" MC_SSHPORT="22" MC_USER="root" MC_RCON="/usr/bin/mcrcon" MC_RCONPORT="25575" MC_RCONPASS="SecretPassword"
+ENV MC_INSTANCE_NAME="paper" MC_SRVIP="jve" MC_SSH="/usr/bin/ssh" MC_SSHPORT="22" MC_USER="root" MC_RCON="/usr/bin/mcrcon" MC_RCONPORT="25575" MC_RCONPASS="SecretPassword"
 ENTRYPOINT ["sh", "/entrypoint.sh"]
 
