@@ -35,5 +35,5 @@ services:
       MC_RCON: /usr/bin/mcrcon
       MC_RCONPORT: 25575
       MC_RCONPASS: do_not_copy_and_paste
-    mem_limit: 128m
+    mem_limit: 256m
 </pre>

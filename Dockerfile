@@ -2,6 +2,10 @@ FROM debian:buster-slim
 LABEL maintainer="ccmite"
 WORKDIR /
 
+COPY bksscripts.tar.gz /
+COPY mcrcon /usr/bin/
+COPY entrypoint.sh /
+
 RUN : "add package" && \
     apt --allow-releaseinfo-change update && apt install -y \
     locales \
@@ -26,13 +30,11 @@ RUN : "add package" && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
-    ln -s /var/spool/cron/.ssh /root/.ssh
+    ln -s /var/spool/cron/.ssh /root/.ssh && \
+    chmod +x /usr/bin/mcrcon && \
+    chmod +x /entrypoint.sh && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY bksscripts.tar.gz /
-COPY mcrcon /usr/bin/
-RUN chmod +x /usr/bin/mcrcon
-COPY entrypoint.sh /
-RUN chmod +x /entrypoint.sh
 ENV MC_INSTANCE_NAME="paper" MC_SRVIP="jve" MC_SSH="/usr/bin/ssh" MC_SSHPORT="22" MC_USER="root" MC_RCON="/usr/bin/mcrcon" MC_RCONPORT="25575" MC_RCONPASS="SecretPassword"
 ENTRYPOINT ["sh", "/entrypoint.sh"]
 
