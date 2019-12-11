@@ -29,27 +29,29 @@ if [ ! -d /var/spool/cron/log ]
     chmod 700 /var/spool/cron/log
 fi
 
+tar zxf /bksscripts.tar.gz
+
 if [ ! -e /var/spool/cron/stop.sh ]
     then
-    touch /var/spool/cron/stop.sh
+    cp -p /stop.sh /var/spool/cron/stop.sh
     chmod 700 /var/spool/cron/stop.sh
 fi
 
 if [ ! -e /var/spool/cron/tar.sh ]
     then
-    touch /var/spool/cron/tar.sh
+    cp -p /tar.sh /var/spool/cron/tar.sh
     chmod 700 /var/spool/cron/tar.sh
 fi
 
 if [ ! -e /var/spool/cron/start.sh ]
     then
-    touch /var/spool/cron/start.sh
+    cp -p /start.sh /var/spool/cron/start.sh
     chmod 700 /var/spool/cron/start.sh
 fi
 
 if [ ! -e /var/spool/cron/purge.sh ]
     then
-    touch /var/spool/cron/purge.sh
+    cp -p purge.sh /var/spool/cron/purge.sh
     chmod 700 /var/spool/cron/purge.sh
 fi
 
@@ -67,6 +69,8 @@ if [ ! -d /var/spool/cron/.ssh ]
     echo "IdentityFile ~/.ssh/id_ecdsa" >> /var/spool/cron/.ssh/config
     chmod 600 /var/spool/cron/.ssh/config
 fi
+
+/usr/bin/printenv | awk '{print "export " $1}' > /env.sh
 
 cron -l 2 -f
 

@@ -28,6 +28,7 @@ RUN : "add package" && \
     chmod +x /usr/local/bin/docker-compose && \
     ln -s /var/spool/cron/.ssh /root/.ssh
 
+COPY bksscripts.tar.gz /
 COPY mcrcon /usr/bin/
 RUN chmod +x /usr/bin/mcrcon
 COPY entrypoint.sh /
